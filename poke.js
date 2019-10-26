@@ -1,62 +1,71 @@
-var pokenamePromise = d3.json("https://pokeapi.co/api/v2/pokemon/?offset=20&limit=40");
+var pokenamePromise = d3.json("https://pokeapi.co/api/v2/pokemon/?offset=20&limit=200");
 var pokeabilityPromise = d3.json("https://pokeapi.co/api/v2/ability/?offset=20&limit=293");
 
-pokenamePromise.then(
+pokenamePromise.then( //get pokemon information
 function (pokemons)
 {
     console.log("pokemons", pokemons);
-    poke_name(pokemons);
+    drawTable(pokemons);
 },
 function (err)
 {
     console.log("fail", err);
 })
 
-pokeabilityPromise.then(
+pokeabilityPromise.then( //this is for future use
 function (abilities)
 {
     console.log("abilities", abilities);
-    poke_ability(abilities);
+    //poke_ability(abilities);
 },
 function (err)
 {
     console.log("fail", err);
 })
 
-var info = function(pokemon)
+var info = function(pokemon) //get full info of pokemon from its name
 {
     var pokePromise = d3.json("https://pokeapi.co/api/v2/pokemon/" + pokemon);
-    pokePromise.then(
+    return pokePromise.then(
     function (poke)
     {
-        console.log("poke", poke);
+        return poke;
     },
     function (err)
     {
         console.log("fail", err);
     })
-    return poke;
 }
 
-var allinfo = [];
-
-var poke_name = function (pokemons)
-{    
-    d3.select("#poke")
-        .selectAll("div")
-        .data(pokemons.results)
-        .enter()
-        .append("div")
-        .text(function (d) {allinfo.push(info(d.name)); return d.name;})
-}
-
-var poke_ability = function(abilities)
+var addCol = function(rows, txt)
 {
-    allinfo.forEach(function(item, index)
-    {
-        item.abilities.forEach(function(item, index)
+    rows.append("td")
+        .text(txt);
+}
+
+var drawTable = function (pokemons)
+{  
+    d3.selectAll("tbody *").remove();
+    
+    var rows = d3.select("tbody")
+                .selectAll("tr")
+                .data(pokemons.results)
+                .enter()
+                .append("tr");
+    
+    rows.append("td")
+        .text(function (d) 
         {
-            
+            return d.name;
         })
-    })
+    
+    pokemons.results.forEach(function(item, index)
+    {
+        info(item.name).then(function (inf)
+            {
+                rows.append("td")
+                    .text(inf.id);
+                console.log(inf.id);
+            })
+        })
 }
