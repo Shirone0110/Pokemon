@@ -37,12 +37,6 @@ var info = function(pokemon) //get full info of pokemon from its name
     })
 }
 
-var addCol = function(rows, txt)
-{
-    rows.append("td")
-        .text(txt);
-}
-
 var drawTable = function (pokemons)
 {  
     d3.selectAll("tbody *").remove();
@@ -59,12 +53,12 @@ var drawTable = function (pokemons)
             return d.name;
         })
     
-    pokemons.results.forEach(function(item, index)
+    pokemons.results.forEach(function(item, index) //go through each element in the result array to get all the names
     {
-        info(item.name).then(function (inf)
+        info(item.name).then(function (inf) //get full info for each name
             {
                 rows.append("td")
-                    .text(inf.id);
+                    .text(inf.id); //show id of a name
                 console.log(inf.id);
             })
         })
