@@ -20,10 +20,14 @@ function (pokemons)
     })
     Promise.all(promises).then(function (poke)
     {
+        poke.sort(function(a, b)
+        {
+            return a.id - b.id;
+        })
         console.log(poke);
         drawTable(poke);
         makeHeader(poke);
-        Row(poke, poke);
+        
     })
 },
 function (err)
@@ -42,14 +46,22 @@ var makeHeader = function(pokemons)
 
 var sortCol = function(pokemons, col, accessor)
 {
+    Row(pokemons, pokemons);
+    var Original = [];
+    
+    pokemons.forEach(function(item, index)
+    {
+        Original[index] = item;  
+    })
+    
     d3.select(col)
         .on("click", function()
         {
             var x = parseInt(d3.select(col).attr("clickcount"), 10);
-            d3.select(col).attr("clickcount", (x + 1) % 3);
+            d3.select(col).attr("clickcount", (x + 1) % 2);
             header.forEach(function(item, index)
             {
-                if (item != col) d3.select(item).attr("clickcount", 0);
+                if (item != col) d3.select(item).attr("clickcount", -1);
                 var cc = d3.select(item).attr("clickcount");
                 var cell = d3.select(item);
                 cell.selectAll("img").remove();
@@ -58,7 +70,7 @@ var sortCol = function(pokemons, col, accessor)
                     cell.append("img")
                     .attr("src", "asc.png");
                 }
-                else if (cc == 2)
+                else if (cc == 0)
                 {
                     cell.append("img")
                         .attr("src", "desc.png");
@@ -67,10 +79,11 @@ var sortCol = function(pokemons, col, accessor)
             pokemons.sort(function(a, b)
             {
                 var cc = d3.select(col).attr("clickcount");
-                if (cc == 2) return (accessor(b) - accessor(a));
+                if (cc == 1) return (accessor(b) - accessor(a));
                 else return (accessor(a) - accessor(b));
             })
             drawTable(pokemons);
+            Row(pokemons, Original);
         })
 }
 
@@ -101,6 +114,8 @@ var show = function(pokemons, original, index)
 {
     var box = d3.select("body");
     var poke = original[index - 1];
+    
+    console.log(original);
     
     box.append("h1")
         .text(poke.name);
