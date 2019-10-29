@@ -1,0 +1,12 @@
+td, th
+{
+    border: 1px solid #000000;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+table
+{
+    margin: auto;
+}
