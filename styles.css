@@ -1,12 +1,106 @@
+body
+{
+    font-size: 20px;
+    background-image: url('background.jpg');
+    text-align: center;
+}
+
 td, th
 {
     border: 1px solid #000000;
     padding: 10px;
     font-size: 20px;
     text-align: center;
+    width: 200px;
+    text-transform: capitalize;
+}
+
+th
+{
+    background-color: rgba(246, 36, 89, 0.5);
+    font-size: 24px;
+}
+
+td
+{
+    background-color: rgba(0, 230, 64, 0.5);
 }
 
 table
 {
     margin: auto;
+    border-collapse: collapse;
+}
+
+button
+{
+    margin-bottom: 20px;
+}
+
+h3
+{
+    font-size: 24px;
+    color: rgba(30, 139, 195, 1);
+    text-shadow: 0.5px 0.5px #000000;
+    margin-bottom: 0px;
+}
+
+p
+{
+    margin-top: 5px;
+}
+
+ul, ol
+{
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+}
+
+li
+{
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+td:hover
+{
+    background-color: rgba(240, 255, 0, 0.5);
+}
+
+div
+{
+    border: 1px solid #000000;
+    border-radius: 20px;
+    background-color: rgba(240, 255, 0, 0.8);
+    width: 500px;
+    margin-left: 100px;
+    text-align: left;
+    float: left;
+}
+
+div>p, ul, ol, h3
+{
+    padding-left: 50px;
+}
+
+div>button
+{
+    margin-left: 50px;
+}
+
+h1
+{
+    text-align: center;
+    font-size: 40px;
+    text-transform: capitalize;
+}
+
+body>img
+{
+    width: 500px;
+    height: 500px;
+    float: right;
+    margin-right: 100px;
+    margin-top: 10%;
 }

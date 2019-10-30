@@ -9,6 +9,8 @@ d3.select("#weight").attr("clickcount", 0);
 
 var header = ["#name", "#id", "#exp", "#height", "#weight"];
 
+var alter = 0;
+
 pokenamePromise.then( //get pokemon information
 function (pokemons)
 {
@@ -24,7 +26,6 @@ function (pokemons)
         {
             return a.id - b.id;
         })
-        console.log(poke);
         drawTable(poke);
         makeHeader(poke);
         
@@ -76,12 +77,31 @@ var sortCol = function(pokemons, col, accessor)
                         .attr("src", "desc.png");
                 }
             })
-            pokemons.sort(function(a, b)
+            if (col == "#name")
             {
-                var cc = d3.select(col).attr("clickcount");
-                if (cc == 1) return (accessor(b) - accessor(a));
-                else return (accessor(a) - accessor(b));
-            })
+                console.log("debug");
+                pokemons.sort(function(a, b)
+                {
+                    var cc = d3.select(col).attr("clickcount");
+                    if (cc == 1)
+                    {
+                        return('' + a.attr).localeCompare(b.attr);
+                    }
+                    else
+                    {
+                        return('' + b.attr).localeCompare(a.attr);
+                    }
+                })
+            }
+            else 
+            {
+                pokemons.sort(function(a, b)
+                {
+                    var cc = d3.select(col).attr("clickcount");
+                    if (cc == 1) return (accessor(b) - accessor(a));
+                    else return (accessor(a) - accessor(b));
+                })
+            }
             drawTable(pokemons);
             Row(pokemons, Original);
         })

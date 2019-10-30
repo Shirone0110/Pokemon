@@ -3,7 +3,7 @@ console.log(poke);
 
 var show = function(poke)
 {
-    var box = d3.select("body");
+    var box = d3.select("body").append("div");
     
     box.append("h1")
         .text(poke.name);
@@ -69,8 +69,19 @@ var show = function(poke)
         .append("li")
         .text(function(d)
         {
-            return d.type.name + ": " + d.slot + " slot";
+            return d.type.name;
         })
+    
+    box.append("button")
+        .text("Back")
+        .on("click", function()
+        {
+            let url = new URL("https://shirone0110.github.io/Pokemon/");
+            window.open(url, "_self");
+        })
+    
+    d3.select("body").append("img")
+        .attr("src",  "https://img.pokemondb.net/artwork/large/" + poke.name + ".jpg")
 }
 
 show(poke);
