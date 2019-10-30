@@ -115,6 +115,7 @@ var Row = function(pokemons, original)
     d3.selectAll("td")
         .on("click", function(d)
     {
+        console.log(original[d.id - 1]);
         sessionStorage.setItem("poke", JSON.stringify(original[d.id - 1]));
         let url = new URL("https://shirone0110.github.io/Pokemon/pokeinfo.html");
         window.open(url, "_self");

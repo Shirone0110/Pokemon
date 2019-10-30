@@ -1,10 +1,9 @@
 var poke = JSON.parse(sessionStorage.getItem("poke"));
 console.log(poke);
 
-/*var show = function(original, index)
+var show = function(poke)
 {
     var box = d3.select("body");
-    var poke = original[index - 1];
     
     box.append("h1")
         .text(poke.name);
@@ -74,4 +73,4 @@ console.log(poke);
         })
 }
 
-show(original, index);*/
+show(poke);
