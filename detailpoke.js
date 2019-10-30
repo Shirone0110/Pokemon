@@ -1,8 +1,9 @@
-var original = sessionStorage.getItem("Original");
+var original = JSON.parse(sessionStorage.getItem("Original"));
 console.log(original);
 var index = sessionStorage.getItem("index");
+console.log(index);
 
-var show = function(original, index)
+/*var show = function(original, index)
 {
     var box = d3.select("body");
     var poke = original[index - 1];
@@ -75,4 +76,4 @@ var show = function(original, index)
         })
 }
 
-show(original, index);
+show(original, index);*/

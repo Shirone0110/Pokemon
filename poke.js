@@ -54,7 +54,7 @@ var sortCol = function(pokemons, col, accessor)
         Original[index] = item;  
     })
     
-    sessionStorage.setItem("Original", Original);
+    sessionStorage.setItem("original", JSON.stringify(Original));
     
     d3.select(col)
         .on("click", function()
@@ -117,9 +117,9 @@ var Row = function(pokemons, original)
     d3.selectAll("td")
         .on("click", function(d)
     {
+        sessionStorage.setItem("index", d.id);
         let url = new URL("https://shirone0110.github.io/Pokemon/pokeinfo.html");
         window.open(url, "_self");
-        sessionStorage.setItem("index", d.id);
         //d3.selectAll("body *").remove();
         //show(pokemons, original, d.id);
     })
