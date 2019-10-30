@@ -1,7 +1,5 @@
-var original = JSON.parse(sessionStorage.getItem("Original"));
-console.log(original);
-var index = sessionStorage.getItem("index");
-console.log(index);
+var poke = JSON.parse(sessionStorage.getItem("poke"));
+console.log(poke);
 
 /*var show = function(original, index)
 {
