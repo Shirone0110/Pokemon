@@ -15,7 +15,6 @@ pokenamePromise.then( //get pokemon information
 function (pokemons)
 {
     console.log("pokemons", pokemons);
-    d3.select("#header").text("Pokedex");
     d3.select("#small").style.visibility = "visible";
     //drawTable(pokemons);
     var promises = pokemons.results.map(function(d)
@@ -29,6 +28,7 @@ function (pokemons)
             return a.id - b.id;
         })
         drawTable(poke);
+        d3.select("#header").text("Pokedex");
         makeHeader(poke);
         
     })
