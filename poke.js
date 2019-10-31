@@ -1,4 +1,4 @@
-var pokenamePromise = d3.json("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=50");
+var pokenamePromise = d3.json("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=200");
 var pokeabilityPromise = d3.json("https://pokeapi.co/api/v2/ability/?offset=0&limit=50");
 
 d3.select("#name").attr("clickcount", 0);
