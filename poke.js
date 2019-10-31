@@ -15,6 +15,8 @@ pokenamePromise.then( //get pokemon information
 function (pokemons)
 {
     console.log("pokemons", pokemons);
+    d3.select("#header").text("Pokedex");
+    d3.select("#small").style.visibility = "visible";
     //drawTable(pokemons);
     var promises = pokemons.results.map(function(d)
     {
@@ -66,12 +68,12 @@ var sortCol = function(pokemons, col, accessor)
                 var cc = d3.select(item).attr("clickcount");
                 var cell = d3.select(item);
                 cell.selectAll("img").remove();
-                if (cc == 1)
+                if (cc == 0)
                 {
                     cell.append("img")
                     .attr("src", "asc.png");
                 }
-                else if (cc == 0)
+                else if (cc == 1)
                 {
                     cell.append("img")
                         .attr("src", "desc.png");
@@ -85,11 +87,15 @@ var sortCol = function(pokemons, col, accessor)
                     var cc = d3.select(col).attr("clickcount");
                     if (cc == 1)
                     {
-                        return('' + a.attr).localeCompare(b.attr);
+                        if (accessor(a) < accessor(b)) return 1;
+                        else if (accessor(a) > accessor(b)) return -1;
+                        else return 0;
                     }
                     else
                     {
-                        return('' + b.attr).localeCompare(a.attr);
+                        if (accessor(a) < accessor(b)) return -1;
+                        else if (accessor(a) > accessor(b)) return 1;
+                        else return 0;
                     }
                 })
             }
@@ -124,10 +130,13 @@ var info = function(pokemon) //get full info of pokemon from its name
     return pokePromise
 }
 
-var addCol = function(rows, txt) //add column
+var addCol = function(rows, txt, chk) //add column
 {
-    rows.append("td")
-        .text(txt);
+    cell = rows.append("td");
+        
+    if (chk == 1)
+        cell.attr("class", "pokename");
+    cell.text(txt);
 }
 
 var Row = function(pokemons, original)
@@ -154,9 +163,14 @@ var drawTable = function (poke)
                 .enter()
                 .append("tr");
     
-    addCol(rows, function(d){return d.name;});
-    addCol(rows, function(d){return d.id;});
-    addCol(rows, function(d){return d.base_experience;});
-    addCol(rows, function(d){return d.height;});
-    addCol(rows, function(d){return d.weight;});
+    addCol(rows, function(d){return d.name;}, 1);
+    addCol(rows, function(d)
+    {
+        if (d.id < 10) return '00'+ d.id; 
+        else if (d.id < 100) return '0' + d.id; 
+        else return d.id;
+    }, 0);
+    addCol(rows, function(d){return d.base_experience;}, 0);
+    addCol(rows, function(d){return d.height / 10;}, 0);
+    addCol(rows, function(d){return d.weight / 10;}, 0);
 }
