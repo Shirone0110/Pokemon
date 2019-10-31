@@ -14,6 +14,23 @@ var show = function(poke)
         .text(poke.name)
         .attr("id", "namepoke");
     
+    box.append("span")
+        .attr("class", "special")
+        .text("Types: ")
+    
+    box.append("span")
+        .text(function()
+        {
+            var s ='';
+            poke.types.forEach(function(item, index)
+            {
+                if (index != poke.types.length - 1)
+                s = s + item.type.name + '/ ';
+                else s = s + item.type.name;
+            })
+        return s;
+    })
+    
     var table = box.append("table").attr("id", "pokeinfo");
     
     var row = table.append("tr");
@@ -36,19 +53,6 @@ var show = function(poke)
         .text("Weight: " + poke.weight / 10 + "kg");
     
     box = box.append("div").attr("id", "stat");
-    
-    box.append("h3")
-        .text("Types")
-    
-    box.append("ol")
-        .selectAll("li")
-        .data(poke.types)
-        .enter()
-        .append("li")
-        .text(function(d)
-        {
-            return d.type.name;
-        })
     
     box.append("h3")
         .text("Abilities");
@@ -81,18 +85,6 @@ var show = function(poke)
         {
             return d.name;
         })
-    
-    /*box.append("h3")
-        .text("Height")
-    
-    box.append("p")
-        .text(poke.height / 10 + " m")
-    
-    box.append("h3")
-        .text("Weight")
-    
-    box.append("p")
-        .text(poke.weight / 10 + " kg")*/
     
     box.append("h3")
         .text("Stats")
