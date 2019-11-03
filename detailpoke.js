@@ -50,7 +50,7 @@ var show = function(poke)
         .text("Base experience: " + poke.base_experience);
     
     row.append("td")
-        .text("Weight: " + poke.weight / 10 + "kg");
+        .text("Weight: " + poke.weight / 10 + " kg");
     
     box = box.append("div").attr("id", "stat");
     
