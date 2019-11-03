@@ -10,7 +10,7 @@
 body
 {
     font-size: 20px;
-    background-image: url('background.jpg');
+    background: url('background.jpg') no-repeat center center fixed;
     text-align: center;
     font-family: 'Arial', sans-serif;
 }
@@ -26,19 +26,19 @@ td, th
 
 th
 {
-    background-color: white;
+    background-color: rgba(255, 153, 51, 0.8);
     font-size: 24px;
     height: 100px;
 }
 
 tr:nth-child(even)
 {
-    background-color: rgba(0, 230, 64, 0.8);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 tr:nth-child(odd)
 {
-    background-color: rgba(95, 241, 204, 0.8);
+    background-color: rgba(217, 217, 217, 0.8);
 }
 
 table
@@ -79,9 +79,9 @@ li
     margin: 10px;
 }
 
-td:hover
+tr:hover
 {
-    background-color: rgba(240, 255, 0, 0.5);
+    background-color: rgba(255, 255, 51, 0.8);
 }
 
 h1
@@ -175,4 +175,13 @@ h4
     font-size: 24px;
     color: rgba(30, 139, 195, 1);
     text-shadow: 0.5px 0.5px #000000;
+}
+
+#small
+{
+    text-shadow:
+		-2px -2px 0 white,
+		2px -2px 0 white,
+		-2px 2px 0 white,
+		2px 2px 0 white;
 }
